@@ -18,6 +18,10 @@ ERD Diagram
 
 
 
+
+
+
+
 #1.	Get the Gross Sales Report for customer ‘Croma India’ The report should include columns: -   
 a. Date  
 b. Product_code  
@@ -44,6 +48,7 @@ f. Gross_price
     	    customer_code=90002002 AND 
             get_fiscal_year(s.date)=2021     
 	LIMIT 1000000;
+![image](https://github.com/user-attachments/assets/8958da21-8c77-4d32-ac0d-9994276fb0ee)
 
 
 
@@ -71,6 +76,7 @@ Using stored procedure, monthly gross sales report can be generated for any cust
         	GROUP BY s.date
         	ORDER BY s.date DESC;
 	END
+![image](https://github.com/user-attachments/assets/bf5eab86-e8ad-43fd-965b-277d47dda940)
 
 
 
@@ -122,6 +128,7 @@ CREATE DATABASE VIEW for gross_sales and net_invoice_sales
 	where ns.fiscal_year = 2021
 	group by ns.customer
 	order by net_sales desc;
+![image](https://github.com/user-attachments/assets/da9f8c83-7e5e-4476-9394-04e7a61f1678)
 
 
 ## Top Markets
@@ -133,6 +140,7 @@ CREATE DATABASE VIEW for gross_sales and net_invoice_sales
 	group by ns.market
 	order by net_sales desc
 	limit 3;
+![image](https://github.com/user-attachments/assets/3d6621dd-a142-4f60-b422-301bd6ba252c)
 
 ## Top Products
 	select  p.product, round(sum(((1 - (po.discounts_pct + po.other_deductions_pct))*net_invoice_sales)/1000000),2) as 	net_sales
@@ -144,6 +152,7 @@ CREATE DATABASE VIEW for gross_sales and net_invoice_sales
 	group by p.product
 	order by net_sales desc
 	limit 3;
+![image](https://github.com/user-attachments/assets/4a4588be-87ea-4a53-a237-7e843eb97fed)
 
 
 OR  
@@ -166,7 +175,9 @@ OR
 
 
 
-#5.    For FY 2021, top 10 market by %net sales. 
+#5.    For FY 2021, top 10 market by %net sales. The output should look like: 
+![image](https://github.com/user-attachments/assets/0f26b56e-9aed-4171-bccf-2ff975aeb6f7)
+
 
 	with cte1 as(
 	select c.customer, round((sum(nsl.net_sales)/1000000),2) as total_sales from net_sales nsl
@@ -191,5 +202,12 @@ OR
 	select *, total_sales*100/sum(total_sales) over (partition by region) as pct_sales
 	from cte1
 	order by region, total_sales desc;
+![image](https://github.com/user-attachments/assets/2b66bc0d-d1e9-4ead-89cd-afc83d8998d0) 
+![image](https://github.com/user-attachments/assets/d916729f-b7d9-4522-9e71-bd45f3e1444c) 
+![image](https://github.com/user-attachments/assets/d233ca03-eb53-4c01-8d61-458aa77a5c8b) 
+![image](https://github.com/user-attachments/assets/6053e2f1-a78b-4274-bae7-a9ca6f70e657)
+
+
+
 
 
