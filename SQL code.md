@@ -1,10 +1,10 @@
 #1.	Get the Gross Sales Report for customer ‘Croma India’ The report should include columns: - 
-a.	Date
-b.	Product_code
-c.	Product
-d.	Variant
-e.	Sold_quantity
-f.	Gross_price
+##	Date
+##	Product_code
+##	Product
+##	Variant
+##	Sold_quantity
+##	Gross_price
 
 
 	SELECT s.date, 
@@ -24,6 +24,7 @@ f.	Gross_price
     	    customer_code=90002002 AND 
             get_fiscal_year(s.date)=2021     
 	LIMIT 1000000;
+
 
 
 
