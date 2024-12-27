@@ -1,10 +1,10 @@
-#1.	Get the Gross Sales Report for customer ‘Croma India’ The report should include columns: - 
-Date  
-Product_code  
-Product  
-Variant  
-Sold_quantity  
-Gross_price  
+#1.	Get the Gross Sales Report for customer ‘Croma India’ The report should include columns: -   
+a. Date  
+b. Product_code  
+c. Product  
+d. Variant  
+e. Sold_quantity  
+f. Gross_price  
 
 
 	SELECT s.date, 
@@ -30,9 +30,9 @@ Gross_price
 
 
 
-#2.	Generate Monthly Total Sales Report for ‘Croma’. The report should have 2 columns – 
-a.	Month
-b.	Total Gross Sales Amount in that month.
+#2.	Generate Monthly Total Sales Report for ‘Croma’. The report should have 2 columns –   
+a.	Month  
+b.	Total Gross Sales Amount in that month.  
 Using stored procedure, monthly gross sales report can be generated for any customer	
 
 	CREATE PROCEDURE `get_monthly_gross_sales_for_customer`(
