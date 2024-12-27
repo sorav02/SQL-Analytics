@@ -7,7 +7,7 @@ e.	Sold_quantity
 f.	Gross_price
 
 
-SELECT s.date, 
+	SELECT s.date, 
             s.product_code, 
             p.product, 
             p.variant, 
@@ -34,7 +34,7 @@ a.	Month
 b.	Total Gross Sales Amount in that month.
 Using stored procedure, monthly gross sales report can be generated for any customer	
 
-CREATE PROCEDURE `get_monthly_gross_sales_for_customer`(
+	CREATE PROCEDURE `get_monthly_gross_sales_for_customer`(
         	in_customer_codes TEXT
 	)
 	BEGIN
