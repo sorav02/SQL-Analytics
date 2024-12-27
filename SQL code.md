@@ -1,10 +1,10 @@
 #1.	Get the Gross Sales Report for customer ‘Croma India’ The report should include columns: - 
-##	Date
-##	Product_code
-##	Product
-##	Variant
-##	Sold_quantity
-##	Gross_price
+	##Date
+	##Product_code
+	##Product
+	##Variant
+	##Sold_quantity
+	##Gross_price
 
 
 	SELECT s.date, 
