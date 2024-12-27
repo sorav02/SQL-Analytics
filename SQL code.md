@@ -188,6 +188,7 @@ OR
 	select *, total_sales*100/sum(total_sales) over () as pct_sales
 	from cte1
 	order by total_sales desc;
+![Screenshot (111)](https://github.com/user-attachments/assets/fb99a414-989c-4390-90c1-1ee0f8c27e21)
 
 
 
