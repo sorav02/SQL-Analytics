@@ -1,3 +1,23 @@
+
+ERD Diagram  
+![image](https://github.com/user-attachments/assets/77825153-7336-4c57-9f72-c48c9670ba6c)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #1.	Get the Gross Sales Report for customer ‘Croma India’ The report should include columns: -   
 a. Date  
 b. Product_code  
@@ -114,7 +134,7 @@ CREATE DATABASE VIEW for gross_sales and net_invoice_sales
 	order by net_sales desc
 	limit 3;
 
-## Top Product
+## Top Products
 	select  p.product, round(sum(((1 - (po.discounts_pct + po.other_deductions_pct))*net_invoice_sales)/1000000),2) as 	net_sales
 	from net_invoice_sales ns
 	join fact_post_invoice_deductions po on
