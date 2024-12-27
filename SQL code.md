@@ -94,35 +94,35 @@ Using stored procedure, monthly gross sales report can be generated for any cust
 CREATE DATABASE VIEW for gross_sales and net_invoice_sales
 
 ## Top customers
-	select ns.customer, round(sum(((1 - (po.discounts_pct + po.other_deductions_pct))*net_invoice_sales)/1000000),2) as net_sales
-from net_invoice_sales ns
-join fact_post_invoice_deductions po on
-ns.customer_code = po.customer_code and ns.product_code = po.product_code and ns.date = po.date 
-where ns.fiscal_year = 2021
-group by ns.customer
-order by net_sales desc;
+	select ns.customer, round(sum(((1 - (po.discounts_pct + po.other_deductions_pct))*net_invoice_sales)/1000000),2) as 	net_sales
+	from net_invoice_sales ns
+	join fact_post_invoice_deductions po on
+	ns.customer_code = po.customer_code and ns.product_code = po.product_code and ns.date = po.date 
+	where ns.fiscal_year = 2021
+	group by ns.customer
+	order by net_sales desc;
 
 
 ## Top Markets
-	select ns.market, round(sum(((1 - (po.discounts_pct + po.other_deductions_pct))*net_invoice_sales)/1000000),2) as net_sales
-from net_invoice_sales ns
-join fact_post_invoice_deductions po on
-ns.customer_code = po.customer_code and ns.product_code = po.product_code and ns.date = po.date 
-where ns.fiscal_year = 2021
-group by ns.market
-order by net_sales desc
-limit 3;
+	select ns.market, round(sum(((1 - (po.discounts_pct + po.other_deductions_pct))*net_invoice_sales)/1000000),2) as 	net_sales
+	from net_invoice_sales ns
+	join fact_post_invoice_deductions po on
+	ns.customer_code = po.customer_code and ns.product_code = po.product_code and ns.date = po.date 
+	where ns.fiscal_year = 2021
+	group by ns.market
+	order by net_sales desc
+	limit 3;
 
 ## Top Product
-	select  p.product, round(sum(((1 - (po.discounts_pct + po.other_deductions_pct))*net_invoice_sales)/1000000),2) as net_sales
-from net_invoice_sales ns
-join fact_post_invoice_deductions po on
-ns.customer_code = po.customer_code and ns.product_code = po.product_code and ns.date = po.date
-join dim_product p on ns.product_code = p.product_code 
-where ns.fiscal_year = 2021
-group by p.product
-order by net_sales desc
-limit 3;
+	select  p.product, round(sum(((1 - (po.discounts_pct + po.other_deductions_pct))*net_invoice_sales)/1000000),2) as 	net_sales
+	from net_invoice_sales ns
+	join fact_post_invoice_deductions po on
+	ns.customer_code = po.customer_code and ns.product_code = po.product_code and ns.date = po.date
+	join dim_product p on ns.product_code = p.product_code 
+	where ns.fiscal_year = 2021
+	group by p.product
+	order by net_sales desc
+	limit 3;
 
 
 OR  
@@ -148,27 +148,27 @@ OR
 #5.    For FY 2021, top 10 market by %net sales. 
 
 	with cte1 as(
-select c.customer, round((sum(nsl.net_sales)/1000000),2) as total_sales from net_sales nsl
-join dim_customer c on nsl.customer_code = c.customer_code  
-where nsl.fiscal_year = 2021
-group by c.customer)
+	select c.customer, round((sum(nsl.net_sales)/1000000),2) as total_sales from net_sales nsl
+	join dim_customer c on nsl.customer_code = c.customer_code  
+	where nsl.fiscal_year = 2021
+	group by c.customer)
 
 	select *, total_sales*100/sum(total_sales) over () as pct_sales
-from cte1
-order by total_sales desc;
+	from cte1
+	order by total_sales desc;
 
 
 
 #6.    Region wise % net sales breakdown by customers:
 
 	with cte1 as(
-select c.customer, c.region, round((sum(nsl.net_sales)/1000000),2) as total_sales from net_sales nsl
-join dim_customer c on nsl.customer_code = c.customer_code  
-where nsl.fiscal_year = 2021
-group by c.customer, c.region)
+	select c.customer, c.region, round((sum(nsl.net_sales)/1000000),2) as total_sales from net_sales nsl
+	join dim_customer c on nsl.customer_code = c.customer_code  
+	where nsl.fiscal_year = 2021
+	group by c.customer, c.region)
 
 	select *, total_sales*100/sum(total_sales) over (partition by region) as pct_sales
-from cte1
-order by region, total_sales desc;
+	from cte1
+	order by region, total_sales desc;
 
 
